@@ -1,0 +1,60 @@
+.user-data-form-base {
+  position: absolute;
+  height: 150px;
+  max-height: 50vh;
+  bottom: -150px;
+  background-color: white;
+  display: flex;
+  transition: left 500ms, bottom 500ms;
+}
+
+.user-data-form-base.visible {
+  bottom: 0;
+}
+
+.user-data-form-base .field-group {
+  display: flex;
+  position: relative;
+  width: 100vw;
+  padding: 15px;
+  flex-direction: column;
+}
+
+.user-data-form-base .field-input {
+  margin-bottom: 15px;
+}
+
+.user-data-form-base .field-group .field-form .action-buttons {
+  display: flex;
+  flex-direction: row;
+}
+
+.user-data-form-base .field-group .field-form .label-bar {
+  display: flex;
+}
+
+.user-data-form-base .field-group .field-form .field-label {
+  text-align: center;
+  flex: 1;
+}
+
+.user-data-form-base .field-group .close-button {
+  width: 30px;
+  max-width: 30px;
+  height: 30px;
+  border-radius: 30px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.user-data-form-base .field-group .prev-button {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+}
+
+.user-data-form-base .field-group .close-button i {
+  font-size: 14px;
+  color: #FF3E3E;
+}

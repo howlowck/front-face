@@ -1,0 +1,6 @@
+.photo-display-base {
+  position: absolute;
+  z-index: -2;
+  max-width: inherit;
+  height: inherit;
+}
