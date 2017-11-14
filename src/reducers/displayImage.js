@@ -7,5 +7,6 @@ export default (prevState = {}, action) => {
       base64: action.data
     }
   }
+
   return { ...prevState }
 }

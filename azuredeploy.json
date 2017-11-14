@@ -1,0 +1,139 @@
+{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "siteName": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of your app"
+      }
+    },
+    "groupId": {
+      "type": "string",
+      "metadata": {
+        "description": "Person Group ID"
+      }
+    },
+    "faceApiEndpoint": {
+      "type": "string",
+      "metadata": {
+        "description": "Your Face API Endpoint (no trailing slash)"
+      }
+    },
+    "faceApiKey": {
+      "type": "securestring",
+      "metadata": {
+        "description": "Your Face API key"
+      }
+    },
+    "userFields": {
+      "type": "string",
+      "metadata": {
+        "description": "your user data fields in JSON stringified form"
+      }
+    },
+    "repoUrl": {
+      "type": "string"
+    }
+  },
+  "variables": {
+    "hostingPlanName": "[concat(parameters('siteName'), 'serviceplan')]"
+  },
+  "resources": [
+    {
+      "apiVersion": "2016-09-01",
+      "name": "[variables('hostingPlanName')]",
+      "type": "Microsoft.Web/serverfarms",
+      "location": "[resourceGroup().location]",
+      "properties": {
+        "name": "[variables('hostingPlanName')]",
+        "workerSize": "1",
+        "hostingEnvironment": "",
+        "numberOfWorkers": 0
+      },
+      "sku": {
+        "Tier": "Standard",
+        "Name": "S1"
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites",
+      "kind": "app",
+      "name": "[parameters('siteName')]",
+      "apiVersion": "2016-08-01",
+      "location": "[resourceGroup().location]",
+      "scale": null,
+      "properties": {
+        "enabled": true,
+        "hostNameSslStates": [
+            {
+                "name": "[concat(parameters('siteName'),'.azurewebsites.net')]",
+                "sslState": "Disabled",
+                "virtualIP": null,
+                "thumbprint": null,
+                "toUpdate": null,
+                "hostType": "Standard"
+            },
+            {
+                "name": "[concat(parameters('siteName'),'.scm.azurewebsites.net')]",
+                "sslState": "Disabled",
+                "virtualIP": null,
+                "thumbprint": null,
+                "toUpdate": null,
+                "hostType": "Repository"
+            }
+        ],
+        "reserved": false,
+        "siteConfig": {
+            "appSettings": [
+                {
+                  "name": "WEBSITE_NODE_DEFAULT_VERSION",
+                  "value": "6.5.0"
+                },
+                {
+                  "name": "GROUP_ID",
+                  "value": "[parameters('groupId')]"
+                },
+                {
+                  "name": "FACE_API_ENDPOINT",
+                  "value": "[parameters('faceApiEndpoint')]"
+                },
+                {
+                  "name": "FACE_API_KEY",
+                  "value": "[parameters('faceApiKey')]"
+                },
+                {
+                  "name": "USER_FIELDS",
+                  "value": "[parameters('userFields')]"
+                }
+            ]
+        },
+        "scmSiteAlsoStopped": false,
+        "hostingEnvironmentProfile": null,
+        "clientAffinityEnabled": true,
+        "clientCertEnabled": false,
+        "hostNamesDisabled": false,
+        "containerSize": 0,
+        "dailyMemoryTimeQuota": 0,
+        "cloningInfo": null
+        },
+        "resources": [
+            {
+                "apiVersion": "2015-08-01",
+                "location": "[resourceGroup().location]",
+                "name": "web",
+                "type": "sourcecontrols",
+                "dependsOn": [
+                    "[resourceId('Microsoft.Web/Sites', parameters('siteName'))]"
+                ],
+                "properties": {
+                    "RepoUrl": "[parameters('repoUrl')]",
+                    "branch": "master",
+                    "isManualIntegration": false
+                }
+            }
+        ]
+    }
+
+  ]
+}

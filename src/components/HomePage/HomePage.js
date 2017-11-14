@@ -6,21 +6,16 @@ import CameraInput from '../CameraInput'
 import PhotoDisplay from '../PhotoDisplay'
 import FaceMask from '../FaceMask'
 import UserDataForm from '../UserDataForm'
+import CaptureButtons from '../CaptureButtons'
 
 class HomePage extends Component {
   capture () {
     const image64 = this.webcam.getBase64()
     this.props.onCaptureClick(image64)
   }
-  getCaptureIcon () {
-    const {isCaptureButtonLoading} = this.props
-    if (isCaptureButtonLoading) {
-      return <i className='fa fa-cog fa-3x fa-spin fa-fw' />
-    }
-    return <i className='fa fa-camera' />
-  }
+
   render () {
-    const {className, enableCameraInput, isCaptureButtonLoading, isCaptureButtonVisible} = this.props
+    const {className, enableCameraInput} = this.props
     return (
       <div className={classNames(['home-page-base', className])}>
         {/* <button onClick={changePage}>Go to about page via redux</button> */}
@@ -31,13 +26,7 @@ class HomePage extends Component {
           width={window.innerWidth}
           height={window.innerHeight}
         />
-        <div className='button-group'>
-          <button disabled={isCaptureButtonLoading}
-            className={'capture-button button is-primary ' + (isCaptureButtonVisible ? '' : 'hidden')}
-            onClick={this.capture.bind(this)}>
-            {this.getCaptureIcon()}
-          </button>
-        </div>
+        <CaptureButtons onCapture={this.capture.bind(this)} />
         <UserDataForm />
       </div>
     )
@@ -48,9 +37,7 @@ HomePage.propTypes = {
   className: PropTypes.string,
   changePage: PropTypes.func,
   onCaptureClick: PropTypes.func,
-  enableCameraInput: PropTypes.bool,
-  isCaptureButtonVisible: PropTypes.bool,
-  isCaptureButtonLoading: PropTypes.bool
+  enableCameraInput: PropTypes.bool
 }
 
 export default HomePage

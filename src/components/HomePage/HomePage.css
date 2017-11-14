@@ -9,17 +9,3 @@
   justify-content: space-around;
 }
 
-.button-group {
-  width: 100vw;
-  z-index: 10;
-}
-
-.button-group .capture-button {
-  position: absolute;
-  left: calc(50% - 35px);
-  width:70px;
-  bottom: 20%;
-  height: 70px;
-  line-height: 70px;
-  border-radius: 100px;
-}

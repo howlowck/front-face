@@ -6,9 +6,7 @@ import { setPhoto } from '../../actions/photo'
 import { fetchDetectStart } from '../../actions/detect'
 
 const mapStateToProps = state => ({
-  enableCameraInput: !get(state, 'displayImage.base64', null),
-  isCaptureButtonVisible: get(state, 'status.identify') !== 'success',
-  isCaptureButtonLoading: get(state, 'status.detect') === 'start' || get(state, 'status.identify') === 'start'
+  enableCameraInput: !get(state, 'displayImage.base64', null)
 })
 
 const mapDispatchToProps = dispatch => ({

@@ -1,0 +1,31 @@
+.file-input-button {
+
+}
+
+.file-input-button input.input-file {
+  width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.file-input-button input.input-file + label {
+  width:70px;
+  height: 70px;
+  line-height: 70px;
+  border-radius: 100px;
+  background-color: yellowgreen;
+  text-align: center;
+  color: white;
+  display: block;
+}
+
+.file-input-button input.input-file + label i {
+  display: inline;
+}
+
+.file-input-button input.input-file:focus + label, .file-input-button input.input-file + label:hover {
+  background-color: red;
+}

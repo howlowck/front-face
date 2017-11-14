@@ -1,0 +1,22 @@
+.capture-buttons {
+  width: 100vw;
+  z-index: 10;
+  display: flex;
+  margin-top: 80vh;
+  
+}
+
+.capture-buttons .button {
+  width:70px;
+  height: 70px;
+  line-height: 70px;
+  border-radius: 100px;
+}
+
+.capture-buttons .spacer {
+  flex: 4;
+}
+
+.capture-buttons .middle-spacer {
+  flex: 1;
+}

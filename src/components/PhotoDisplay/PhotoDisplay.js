@@ -12,9 +12,7 @@ const PhotoDisplay = ({ className, photo, width, height, xOffset }) => (
     height={height}
     style={{
       top: 0,
-      left: -1 * xOffset,
-      height: height,
-      width: width
+      left: -1 * xOffset
     }}
   />
 )

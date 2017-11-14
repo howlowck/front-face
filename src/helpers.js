@@ -40,3 +40,19 @@ export const getMiddleString = (str) => {
   typeArray.pop()
   return camelCase(typeArray.join('-'))
 }
+
+export function calculateCanvasDimension (streamAspectRatio, propWidth, propHeight) {
+  let width = propHeight * streamAspectRatio
+  let height = propHeight
+  let xOffset = 0
+
+  if (width > propWidth) {
+    xOffset = (width - propWidth) / 2
+  }
+
+  return {
+    width: +width.toFixed(0),
+    height: +height.toFixed(0),
+    xOffset: +xOffset.toFixed(0)
+  }
+}
