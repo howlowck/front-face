@@ -2,6 +2,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
+import EXIF from 'exif-js'
 import './FileInputButton.css'
 
 function getBase64FromFile (file) {
@@ -15,14 +16,29 @@ function getBase64FromFile (file) {
       const img = new Image()
 
       img.onload = function () {
-        const {width: picWidth, height: picHeight} = this
-        const aspectRatio = picWidth / picHeight
-        const windowWidth = window.innerWidth
-        const windowHeight = window.innerHeight
-        canvas.width = windowWidth
-        canvas.height = windowHeight
-        ctx.drawImage(this, 0, 0, windowWidth, windowWidth / aspectRatio)
-        resolve({base64: canvas.toDataURL(), aspectRatio, windowWidth, windowHeight, xOffset: 0})
+        EXIF.getData(img, function () {
+          const orientation = EXIF.getTag(this, 'Orientation')
+          const {width: picWidth, height: picHeight} = this
+          const aspectRatio = picWidth / picHeight
+          const windowWidth = window.innerWidth
+          const windowHeight = window.innerHeight
+          canvas.width = windowWidth
+          canvas.height = windowHeight
+          const width = windowWidth
+          const height = windowWidth / aspectRatio
+          switch (orientation) {
+            case 2: ctx.transform(-1, 0, 0, 1, width, 0); break
+            case 3: ctx.transform(-1, 0, 0, -1, width, height); break
+            case 4: ctx.transform(1, 0, 0, -1, 0, height); break
+            case 5: ctx.transform(0, 1, 1, 0, 0, 0); break
+            case 6: ctx.transform(0, 1, -1, 0, height, 0); break
+            case 7: ctx.transform(0, -1, -1, 0, height, width); break
+            case 8: ctx.transform(0, -1, 1, 0, 0, width); break
+            default: break
+          }
+          ctx.drawImage(this, 0, 0, width, height)
+          resolve({base64: canvas.toDataURL(), aspectRatio, windowWidth, windowHeight, xOffset: 0})
+        })
       }
 
       img.src = reader.result

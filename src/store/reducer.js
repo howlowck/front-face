@@ -23,8 +23,8 @@ export default combineReducers({
   fields: fieldsReducer,
   views: viewsReducer,
   userData: userDataReducer,
-    selectedFace: selectedFaceReducer,
-    trainingStatus: trainingStatusReducer,
+  selectedFace: selectedFaceReducer,
+  trainingStatus: trainingStatusReducer,
     // Add Reducers Here (do not delete this line)
   routing: routerReducer
 })

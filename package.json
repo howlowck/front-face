@@ -28,6 +28,7 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
+    "exif-js": "^2.3.0",
     "plop": "^1.8.1",
     "redux-observable": "^0.16.0",
     "reselect": "^3.0.1",

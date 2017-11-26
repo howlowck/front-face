@@ -5,9 +5,14 @@ import { get } from 'lodash'
 import { setPhoto } from '../../actions/photo'
 import { fetchDetectStart } from '../../actions/detect'
 
-const mapStateToProps = state => ({
-  enableCameraInput: !get(state, 'displayImage.base64', null)
-})
+const mapStateToProps = state => {
+  const width = get(state, 'displaySize.width', 0)
+  const height = get(state, 'displaySize.height', 0)
+  console.log('width, height', width, height)
+  return {
+    enableCameraInput: !get(state, 'displayImage.base64', null) || width < height
+  }
+}
 
 const mapDispatchToProps = dispatch => ({
   changePage: () => dispatch(push('/about')),
