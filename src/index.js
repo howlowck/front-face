@@ -4,7 +4,7 @@ import { Provider } from 'react-redux'
 import { ConnectedRouter } from 'react-router-redux'
 import store, { history } from './store/store'
 import AppComponent from './components/App'
-import registerServiceWorker from './registerServiceWorker'
+// import registerServiceWorker from './registerServiceWorker'
 
 import './index.css'
 
@@ -26,4 +26,4 @@ if (module.hot) {
   })
 }
 
-registerServiceWorker()
+// registerServiceWorker()
