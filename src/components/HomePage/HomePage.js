@@ -7,6 +7,7 @@ import PhotoDisplay from '../PhotoDisplay'
 import FaceMask from '../FaceMask'
 import UserDataForm from '../UserDataForm'
 import CaptureButtons from '../CaptureButtons'
+import AddPersonFaceNotification from '../AddPersonFaceNotification'
 
 class HomePage extends Component {
   capture () {
@@ -19,6 +20,7 @@ class HomePage extends Component {
     return (
       <div className={classNames(['home-page-base', className])}>
         {/* <button onClick={changePage}>Go to about page via redux</button> */}
+        <AddPersonFaceNotification />
         <FaceMask />
         <PhotoDisplay />
         <CameraInput enabled={enableCameraInput}

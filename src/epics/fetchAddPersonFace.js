@@ -8,7 +8,7 @@ import {postFetchToObservable} from '../helpers'
 export default action$ =>
   action$.ofType(FETCH_ADD_PERSON_FACE_START)
     .mergeMap((action) => {
-      console.log('data in add person face', action.data)
+      // console.log('data in add person face', action.data)
       return postFetchToObservable('/api/personFace', action.data) // data {personId, base64, targetFace: {x, y, width, height}}
         .flatMap(() => Observable.of(
             Observable.of(fetchAddPersonFaceSuccess()),

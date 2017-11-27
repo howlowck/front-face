@@ -1,0 +1,31 @@
+.add-person-face-notification {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -100px;
+  margin-left: -100px;
+  width: 200px;
+  height: 200px;
+  border-radius: 20px;
+  text-align: center;
+}
+
+.add-person-face-notification i {
+  font-size: 120px;
+  line-height: 200px;
+}
+
+.add-person-face-notification.notstarted {
+  display: none;
+}
+
+.add-person-face-notification.start {
+  background: rgb(207, 207, 207);
+  color: black;
+}
+
+.add-person-face-notification.success {
+  background: rgb(17, 182, 17);
+  color: white;
+}
